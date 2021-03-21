@@ -1,7 +1,7 @@
-<template>
-  <div>home</div>
+<template lang="pug">
+main
+  section home
 </template>
-
 <script setup>
 import { useHead } from "@vueuse/head";
 

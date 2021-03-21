@@ -17,8 +17,8 @@ export default defineConfig({
   plugins: [
     vue(),
     legacy({
-      polyfills: ['es.promise.finally'],
-      modernPolyfills: ['es.promise.finally']
+      polyfills: ['es.promise'],
+      modernPolyfills: ['es.promise']
     }),
 
     // https://github.com/antfu/vite-plugin-windicss
@@ -34,11 +34,14 @@ export default defineConfig({
       extensions: ['vue'],
     }),
   ],
+  css: {
+    postcss: process.cwd()
+  },
   build: {
     rollupOptions: {
       input: {
         index: path.resolve(__dirname, 'index.html'),
-        home: path.resolve(__dirname, 'index.html')
+        home: path.resolve(__dirname, 'home/index.html')
       }
     }
   },

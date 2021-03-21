@@ -1,5 +1,8 @@
-<template>
-  <div>index</div>
+<template lang="pug">
+main.qm-flex.qm-justify-center.qm-items-center
+  section
+    .title
+      router-link(to="/home") go home
 </template>
 
 <script setup>
@@ -23,5 +26,16 @@ useHead({
 });
 </script>
 
-<style>
+<style lang="scss">
+.qm {
+  &-flex {
+    display: flex;
+  }
+  &-justify-center {
+    justify-content: center;
+  }
+  &-items-center {
+    align-items: center;
+  }
+}
 </style>
