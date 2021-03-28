@@ -9,6 +9,7 @@ import ViteComponents from 'vite-plugin-components'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.NODE_ENV !== 'production' ? '/' : '/m/',
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
@@ -16,10 +17,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    legacy({
-      polyfills: ['es.promise'],
-      modernPolyfills: ['es.promise']
-    }),
+    legacy(),
 
     // https://github.com/antfu/vite-plugin-windicss
     WindiCSS({
@@ -37,11 +35,16 @@ export default defineConfig({
   css: {
     postcss: process.cwd()
   },
-  build: {
-    rollupOptions: {
-      input: {
-        index: path.resolve(__dirname, 'index.html'),
-        home: path.resolve(__dirname, 'home/index.html')
+  server:{
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'http://dev-api.qimiao.com/',
+        changeOrigin: true
+      },
+      '/tools': {
+        target: 'http://dev-api.qimiao.com/',
+        changeOrigin: true
       }
     }
   },

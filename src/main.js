@@ -6,6 +6,4 @@ import store from '~/store';
 import App from './App.vue'
 const head = createHead()
 
-// const router = setupLayouts(generatedRoutes)
-
-createApp(App).use(head).use(router).use(store).mount('#app')
+createApp(App).use(head).use(router).use(store).mount('#main')
