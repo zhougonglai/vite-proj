@@ -1,140 +1,110 @@
 <template lang="pug">
-router-link(to="/activitys/year_card")
-  img(
-    src="/src/assets/img/index/banner@2x.png",
-    alt="banner",
-    srcset="/src/assets/img/index/banner@3x.png 3x"
-  )
-.flex-1.p-4.grid.grid-cols-2.gap-4(v-if="packages.price")
-  .box.flex.flex-col.items-center(
-    v-for="(price, i) in packages.price.list",
-    :key="price.id",
-    :class="{ active: state.active === i, recommend: price.is_recommend }",
-    @click="setActive(i)"
-  )
-    .box-title {{ price.title }}
-    .box-price.text-2xl.mt-4
-      small.text-sm ¥
-      | {{ price.price / 100 }}
-    .box-label {{ Number(price.price / 100 / price.extend_time).toFixed(2) }}/{{ price.extend_type === 1 ? '每月' : '每分钟' }}
-    small.box-desc.mt-5 {{ price.desc }}
-
-.notice.px-5.pb-20
-  .notice-title 温馨提示
-  ul.notice-list.mt-2
-    li.notice-item.text-sm 1.奇妙加速器账号与微信端账号为同一账号，微信公众号购买的时长客户端也能使用；
-    li.notice-item.text-sm.mt-2 2.因地区、宽带运营商、用户本地网络波动等不可抗因素，奇妙无法保证每个加速器用户网络延迟时间一致，请测试确认后再购买,因此奇妙不支持退款
-
-.fixed.p-4.w-full.flex.items-center.justify-center.bottom-0(
-  v-if="packages.price"
-)
-  button.pay-btn 支付 ¥{{ packages.price.list[state.active].price / 100 }}
+section.flex-1
+  .fab
+    svg.icon(aria-hidden="true")
+      use(xlink:href="#icon-qrcode")
+  //- template(v-if="qrcode.value")
+  //-   .weui-mask
+  //-   .weui-half-screen-dialog.weui-half-screen-dialog_show
+  //-     .weui-half-screen-dialog__hd
+  //-       .weui-half-screen-dialog__hd__main
+  //-         .weui-flex
+  //-           img(
+  //-             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII="
+  //-           )
+  //-           | 昵称
+  //-     .weui-half-screen-dialog__bd bd
+  //-     .weui-half-screen-dialog__ft ft
+  .content
+    .weui-cells__title 自我介绍
+    .weui-cells
+      .weui-cell
+        .weui-cell__bd
+          p 姓名
+        .weui-cell__ft 周公来
+      .weui-cell
+        .weui-cell__bd
+          p 年龄
+        .weui-cell__ft 92年
+      .weui-cell
+        .weui-cell__bd
+          p 身高
+        .weui-cell__ft 178CM
+      .weui-cell
+        .weui-cell__bd
+          p 体型
+        .weui-cell__ft 偏瘦
+    .weui-cells__title 基本信息
+    .weui-cells
+      .weui-cell
+        .weui-cell__bd
+          p 💼
+        .weui-cell__ft IT / 互联网游戏
+      .weui-cell
+        .weui-cell__bd
+          p 🎓
+        .weui-cell__ft 专科
+      .weui-cell
+        .weui-cell__bd
+          p 💰
+        .weui-cell__ft 10-20万
+      .weui-cell
+        .weui-cell__bd
+          p
+            svg.icon(aria-hidden="true")
+              use(xlink:href="#icon-icon_signin_line")
+        .weui-cell__ft 洪山区花山软件新城
+    article.weui-article
+      h3 自我介绍
+      p 先天内向性格.理科男、程序员.慢热型.有比较高的共情能力.会在逐渐熟悉之后会遵循一定模式建立亲密关系.（傲娇？！）
+      p 平时喜欢看美剧、英剧和一些自媒体.回形针、漫剧速读、游戏解说.
+      p 我的理想型是 性格温柔，能够换位思考，有一定独立能力.
+      img(src="/src/assets/img/index/WechatIMG50.jpeg", alt="关于我")
 </template>
-
 <script>
-import { onBeforeMount, onMounted, reactive } from "vue";
 import { useHead } from "@vueuse/head";
-import { useStore, mapState } from "vuex";
 import { bowser } from "~/utils/ua";
 
-const activity_id = 1;
-
 export default {
-  computed: {
-    ...mapState("index", ["packages"]),
-  },
   setup() {
-    const store = useStore();
     useHead({
-      title: "奇妙加速器",
+      title: "关于我",
     });
-    const state = reactive({ active: 0 });
-    onMounted(async () => {
-      await store.dispatch("index/fetchPackagePrice", {
-        activity_id,
-        price_type: 0,
-      });
-    });
-
-    const setActive = (i) => (state.active = i);
-
-    return {
-      state,
-      setActive,
-    };
+    return {};
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.box {
-  width: 164px;
-  height: 178px;
-  background: #f7f6fb;
-  border: 1px solid #ebeaef;
-  border-radius: 5px;
-  padding: 18px 0;
+section.flex-1 {
+  background-image: url("/src/assets/img/index/WechatIMG51.jpeg");
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100%;
+  padding-top: 32vh;
+  overflow-y: auto;
 
-  &.active {
-    background-color: #fff8f2;
-    border-color: #ff8335;
-    box-shadow: 0 0 2.66667vw #e59f59;
+  .content {
+    background-color: white;
+    border-radius: 15px 15px 0 0;
+    padding-top: 15px;
+    padding-bottom: 15vh;
   }
 
-  &.recommend {
-    position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      background-image: url("/src/assets/img/index/tag@2x.png");
-      width: 53px;
-      height: 23px;
-      background-size: contain;
-      background-position: top right;
-      background-repeat: no-repeat;
-
-      @media screen and (min-resolution: 3dppx) {
-        background-image: url("/src/assets/img/index/tag@3x.png");
-      }
-    }
+  .fab {
+    position: fixed;
+    bottom: 15vh;
+    right: 5vw;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px 2px rgba($color: #000000, $alpha: 0.02),
+      -1px 2px 4px 0 rgba($color: #000000, $alpha: 0.04),
+      0 4px 4px 4px rgba($color: #000000, $alpha: 0.1);
+    font-size: 2.5rem;
+    padding: 8px;
+    z-index: 5;
   }
-
-  &-title {
-    color: var(--FONT-2);
-  }
-
-  &-label {
-    color: var(--weui-BG);
-    text-align: center;
-    width: 108px;
-    height: 26px;
-    background: linear-gradient(90deg, #ffa91f 0%, #ff6712 100%);
-    opacity: 1;
-    border-radius: 13px;
-  }
-
-  &-desc {
-    color: var(--FONT-3);
-  }
-}
-
-.notice {
-  color: var(--FONT-3);
-}
-
-.pay-btn {
-  width: 326px;
-  height: 47px;
-  background: linear-gradient(88deg, #7d59ff 0%, #9b66ff 100%);
-  box-shadow: 0px 6px 16px rgba(133, 92, 255, 0.15);
-  opacity: 1;
-  border-radius: 24px;
-  color: var(--weui-BG);
-}
-
-.fixed {
-  background-color: var(--weui-BG);
 }
 </style>
