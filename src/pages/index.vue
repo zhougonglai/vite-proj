@@ -56,7 +56,7 @@ section.flex-1
       img(src="../assets/img/index/WechatIMG50.jpeg", alt="关于我")
 </template>
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useHead } from "@vueuse/head";
 
 export default {
@@ -67,6 +67,25 @@ export default {
     const handleQrcode = () => {
       qrcode.value = !qrcode.value;
     };
+    onMounted(() => {
+      wx.ready(() => {
+        //需在用户可能点击分享按钮前就先调用
+        wx.updateAppMessageShareData({
+          title: "关于我", // 分享标题
+          desc: "92年,理工男", // 分享描述
+          link: "https://resume.zhougonglai.vercel.app/", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl:
+            "https://resume.zhougonglai.vercel.app/assets/WechatIMG50.29c88231.jpeg", // 分享图标
+        });
+
+        wx.updateTimelineShareData({
+          title: "关于我", // 分享标题
+          link: "https://resume.zhougonglai.vercel.app/", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl:
+            "https://resume.zhougonglai.vercel.app/assets/WechatIMG50.29c88231.jpeg", // 分享图标
+        });
+      });
+    });
 
     return {
       qrcode,
