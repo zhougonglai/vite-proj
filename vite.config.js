@@ -9,7 +9,6 @@ import ViteComponents from 'vite-plugin-components'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV !== 'production' ? '/' : '/m/',
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
