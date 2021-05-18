@@ -36,6 +36,12 @@ section.flex-1
         .weui-cell__ft IT / 互联网游戏
       .weui-cell
         .weui-cell__bd
+          p
+            svg.icon(aria-hidden="true")
+              use(xlink:href="#icon-icon_signin_line")
+        .weui-cell__ft 洪山区花山软件新城
+      .weui-cell
+        .weui-cell__bd
           p 🎓
         .weui-cell__ft 专科
       .weui-cell
@@ -44,16 +50,24 @@ section.flex-1
         .weui-cell__ft 10-20万
       .weui-cell
         .weui-cell__bd
-          p
-            svg.icon(aria-hidden="true")
-              use(xlink:href="#icon-icon_signin_line")
-        .weui-cell__ft 洪山区花山软件新城
+          p 🏠
+        .weui-cell__ft 祖传1套
+      .weui-cell
+        .weui-cell__bd
+          p 🚗
+        .weui-cell__ft 无
     article.weui-article
       h3 自我介绍
       p 先天内向性格.理科男、程序员.慢热型.有比较高的共情能力.会在逐渐熟悉之后会遵循一定模式建立亲密关系.（傲娇？！）
-      p 平时喜欢看美剧、英剧和一些自媒体.回形针、漫剧速读、游戏解说.
-      p 我的理想型是 性格温柔，能够换位思考，有一定独立能力.
-      img(src="../assets/img/index/WechatIMG50.jpeg", alt="关于我")
+      p 平时喜欢看美剧、英剧和一些自媒体.回形针、漫剧、游戏解说.等沉浸类故事.
+      p 我的理想型是 能够换位思考,有独立能力.有经营夫妻关系的理念. (互联网相关工作加分)
+      img(src="../assets/img/index/WechatIMG50.jpeg", alt="双十一多余的红包🧧换的小饰品")
+      p 双十一多余的红包🧧换的小饰品
+      img(
+        src="../assets/img/index/WechatIMG100.jpeg",
+        alt="镜子🪞怎么可以这么脏...不会自拍🤳"
+      )
+      p 镜子🪞怎么可以这么脏...不会自拍🤳
 </template>
 <script>
 import { reactive } from "vue";
