@@ -111,9 +111,10 @@ section.flex-1 {
   min-height: 100%;
   padding-top: 32vh;
   overflow-y: auto;
+  color: var(--weui-FG-0);
 
   .content {
-    background-color: white;
+    background-color: var(--weui-BG-0);
     border-radius: 15px 15px 0 0;
     padding-top: 15px;
     padding-bottom: 15vh;
@@ -123,7 +124,7 @@ section.flex-1 {
     position: fixed;
     bottom: 15vh;
     right: 5vw;
-    background-color: white;
+    background-color: var(--weui-BG-2);
     border-radius: 50%;
     box-shadow: 0 4px 6px 2px rgba($color: #000000, $alpha: 0.02),
       -1px 2px 4px 0 rgba($color: #000000, $alpha: 0.04),
