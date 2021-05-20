@@ -38,13 +38,9 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       '/api': {
-        target: 'http://dev-api.qimiao.com/',
+        target: 'http://dev-api2.nn.com/',
         changeOrigin: true
       },
-      '/tools': {
-        target: 'http://dev-api.qimiao.com/',
-        changeOrigin: true
-      }
     }
   },
   optimizeDeps: {
